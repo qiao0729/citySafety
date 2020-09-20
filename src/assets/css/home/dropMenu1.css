@@ -1,0 +1,102 @@
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .menu {
+    display: block;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  
+  .menu-title:hover {
+    text-shadow: 0 0 1px #999,    
+    1px 1px 1px #888,    
+    2px 2px 1px #777,    
+    3px 3px 1px #666,    
+    4px 4px 1px #555,    
+    5px 5px 1px #444; 
+  }
+
+  .menu:hover > .menu-title:before {
+    border-top-width: 0;
+    transition: 0.2s border-top-width ease-in, 0.3s border-top-color;
+  }
+  
+  .menu:hover > .menu-title:after {
+    border-bottom-width: 5px;
+    transition: 0.2s 0.2s border-bottom-width ease-out;
+  }
+  .menu-dropdown {
+    min-width: 100%;
+    padding: 5px 0;
+    position: absolute;
+    background: #ebebeb;
+    z-index: 100;
+    transition: 0.5s padding, 0.5s background;
+    text-shadow: 0 0 0px #999,    
+    0px 0px 0px #888,    
+    0px 0px 0px #777,    
+    0px 0px 0px #666,    
+    0px 0px 0px #555,    
+    0px 0px 0px #444; 
+
+    border: 1px solid #696;padding: 60px 0;text-align: center; width: 200px;
+    border-radius: 8px;
+    box-shadow: #666 0px 0px 10px;
+
+  }
+  
+  .menu:not(:hover) > .menu-dropdown {
+    padding: 0px 0;
+    background: #dddddd;
+    z-index: 99;
+  }
+  
+  .menu:not(:hover) > .menu-dropdown:after {
+    border-top-color: #dddddd;
+  }
+  
+  .menu:not(:hover) > .menu-title:after {
+    border-bottom-color: #dddddd;
+  }
+  
+  .menu-dropdown > * {
+    overflow: hidden;
+    height: 35px;
+    padding: 8px 0px;
+    background: transparent;
+    white-space: nowrap;
+    transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
+  }
+  
+  .menu-dropdown > *:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu:not(:hover) > .menu-dropdown > * {
+    visibility: hidden;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    color: rgba(25, 25, 25, 0);
+    transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
+    z-index: 99;
+  }
+  
+  .hList > * {
+    float: left;
+  }
+  
+  .hList > * + * {
+    margin-left: 0;
+  }
+
+  
