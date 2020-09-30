@@ -113,6 +113,10 @@
         </div>
       </div>
     </div>
+	
+	<div id="layer" style="margin: 20px;" v-show="layerShow">
+		<img src="" />
+	</div>
   </div>
 </template>
 
@@ -123,6 +127,7 @@ import { WebVideoCtrl } from "../../static/webVideoCtrl.js";
 export default {
   data() {
     return {
+	  layerShow:false,
       fontColor: "#fff",
       chartName: {
         chart1: "",
@@ -227,6 +232,7 @@ export default {
       hoursData: [],
       //记录当前的分屏类型
       iWndowType:2, //默认值为1：1*1  2：2*2 3：3*3
+	  
     };
   },
   mounted() {
@@ -258,6 +264,18 @@ export default {
           that.getTime();
         }, 1000);
       }
+	  
+	  
+	  //定时刷新，过1分钟弹出一个预警，来模拟预警的情况
+	  if (this.yjtimer) {
+	  	clearInterval(this.yjtimer);
+	  } else {
+	  	//前端定时刷新
+	  	this.yjtimer = setInterval(function() {
+			//执行弹窗事件
+			//that.showYjInfo();
+	  	}, 6000)
+	  }
     });
   },
   //vue实例销毁的时候清除定时器
@@ -267,6 +285,36 @@ export default {
     this.onLogout();
   },
   methods: {
+	  //弹窗模拟预警信息
+	  showYjInfo(){
+		  console.log('预警');
+		  //利用抓图功能将图片保存
+		  var path = WebVideoCtrl.I_GetLocalCfg();//刚开始文件路径为null，需要进行相应的设置
+		  var status = WebVideoCtrl.I_GetWindowStatus(0);
+		  //WebVideoCtrl.I_CapturePic('项目预警.jpg')
+		 if (status != null) {
+			var iRet = WebVideoCtrl.I_CapturePic('抓图');
+			if (0 == iRet) {
+				console.log("抓图成功！");
+			} else {
+				console.log("抓图失败！");
+			}
+			
+		}
+		
+		//抓成功了，那么如何设置抓图路径
+		  
+		  //来个弹窗
+		  layer.open({
+		  	type: 1,
+		  	title: `预警信息`,
+		  	area: ['80vw', '80vh'],
+		  	shadeClose: true, //点击遮罩关闭
+		  	//maxmin: true, //允许全屏最小化
+		  	content: $("#layer"), //绑定一个DOM
+		  });
+	  },
+	  
     lastChar(){
       var lastChar = this.$echarts.init(
         document.getElementById("divPlugin2")

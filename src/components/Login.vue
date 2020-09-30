@@ -364,7 +364,8 @@
 	.sub-main-w3 form {
 		max-width: 400px;
 		/* margin: 0 15vw; */
-		background: rgba(140, 137, 137, 0.28);
+		/* background: rgba(140, 137, 137, 0.28); */
+		background: rgba(8,2,36,0.5);
 		padding: 3.5vw;
 		box-sizing: border-box;
 		display: -webkit-flex;
@@ -619,7 +620,7 @@
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		background-image: url(../static/img/location-banner.jpg);
+		background-image: url(../static/img/bk3.jpg);
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
@@ -708,6 +709,9 @@
 		}
 	}
 	
+	h1{
+		    font-size: 4.5vw !important;
+	}
 	.title{
 		display: -webkit-flex;
 		display: -webkit-box;
@@ -722,9 +726,12 @@
 		-webkit-justify-content: center;
 		justify-content: center;
 		top: 2%;
-		margin-left: 30%;
+		margin-left: 25%;
 		position: absolute;
 		-webkit-filter: brightness(1);
 		filter: brightness(1);
+		color: #fafafa;
+		letter-spacing: 0;
+		text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135
 	}
 </style>

@@ -43,163 +43,7 @@
       </div>
     </header>
     <!--内容部分-->
-<div class="con left">
-    <!--选择时间-->
-    <div class="static_top left">
-        <i></i><span>统计概况</span>
-    </div>
-    <!--数据总概-->
-    <div class="stiatic_top_con left">
-
-<table>
-    <tr>
-        <td class="labe_td">总概：</td>
-        <td colspan="3" class="sky">拥有车辆数123456台，车辆整体情况比较良好，但违法纪律数也很多，应该着重改善驾驶人员交通法律法规教育！</td>
-    </tr>
-    <tr>
-        <td class="labe_td">新进车辆：</td>
-        <td>33987台</td>
-        <td class="labe_td">违法车辆：</td>
-        <td class="org">33987台</td>
-    </tr>
-    <tr>
-        <td class="labe_td">报废车辆：</td>
-        <td class="red">33987台</td>
-        <td class="labe_td">报废车辆：</td>
-        <td>33987台</td>
-    </tr>
-</table>
-
-    </div>
-    <!--统计分析图-->
-    <div class="static_top left">
-        <i></i><span>统计分析一</span>
-    </div>
-    <div class="div_any">
-        <div class="left div_any03">
-            <div class="div_any_child01 left">
-                <div class="div_any_title"><img src="img/title_1.png">车辆类型统计 </div>
-                <p id="char1" class="p_chart"></p>
-                <div class="char_table"><div class="table_p table_p01">
-                    <table>
-                        <thead><tr>
-                            <th>排名</th>
-                            <th>车牌号</th>
-                            <th>里程数（km）</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        </tbody>
-                    </table>
-                </div></div>
-
-            </div>
-            <div class="div_any_child01 left">
-                <div class="div_any_title"><img src="img/title_2.png">车辆状态统计 </div>
-                <p id="char2" class="p_chart"></p>
-                <div class="char_table"><div class="table_p table_p01">
-                    <table>
-                        <thead><tr>
-                            <th>排名</th>
-                            <th>车牌号</th>
-                            <th>里程数（km）</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        </tbody>
-                    </table>
-                </div></div>
-            </div>
-        </div>
-
-        <div class="static_top left">
-            <i></i><span>统计分析一</span>
-        </div>
-        <div class="right div_any03">
-            <div class="div_any_child01 left">
-                <div class="div_any_title"><img src="img/title_4.png">车辆行驶统计 </div>
-                <p id="char3" class="p_chart"></p>
-                <div class="char_table"><div class="table_p table_p01">
-                    <table>
-                        <thead><tr>
-                            <th>排名</th>
-                            <th>车牌号</th>
-                            <th>里程数（km）</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        </tbody>
-                    </table>
-                </div></div>
-            </div>
-            <div class="div_any_child01 left">
-                <div class="div_any_title"><img src="img/title_5.png">车辆报警统计 </div>
-                <p id="char4" class="p_chart"></p>
-                <div class="char_table"><div class="table_p table_p01">
-                    <table>
-                        <thead><tr>
-                            <th>排名</th>
-                            <th>车牌号</th>
-                            <th>里程数（km）</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        </tbody>
-                    </table>
-                </div></div>
-            </div>
-        </div>
-        <div class="static_top left">
-            <i></i><span>统计分析一</span>
-        </div>
-
-        <div class="right div_any03">
-
-            <div class="div_any_child01 left div_any_child01_wh">
-                <div class="div_any_title"><img src="img/title_5.png">车辆报警统计 </div>
-                <p id="char5" class="p_chart"></p>
-                <div class="char_table"><div class="table_p table_p01">
-                    <table>
-                        <thead><tr>
-                            <th>排名</th>
-                            <th>车牌号</th>
-                            <th>里程数（km）</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        <tr><td>1</td><td>京A12345</td><td>134.2</td></tr>
-                        </tbody>
-                    </table>
-                </div></div>
-            </div>
-        </div>
-    </div>
-
-
+<div class="con left" id="map_qx">
 </div>
   </div>
 </template>
@@ -210,7 +54,65 @@ import "../../assets/js/urbanPublicSafety/echarts-4.2.1.min.js";
 import "../../assets/js/urbanPublicSafety/base.js";
 import "../../assets/js/urbanPublicSafety/static.js";
 export default {
-
+	data(){
+		return{
+			
+		}
+	},
+	mounted(){
+		this.$nextTick(function(){
+			this.baiduQx();//百度迁徙模拟加载
+		})
+	},
+	methods: {
+		//百度迁徙模拟
+		async baiduQx() {
+			//从数据库中获取流入成都的相关数据
+			var cdInData = await this.getData();
+			//返回对应地名的
+			//console.log(cdInData);
+			//cdInData为一个数组，每一个数组元素为一个对象也就是一条消息，有以下属性字段：city_name:城市名 provice_name:省名 value：所占比例
+			//自我感觉百度慧眼的实现是通过百度地图加echarts实现的，所以可以先展示一个百度地图，然后看看怎么在百度地图上添加echarts图表
+			var map = new BMap.Map("map_qx"); // 创建Map实例
+			map.centerAndZoom(new BMap.Point(104.06, 30.67), 11); // 初始化地图,设置中心点坐标和地图级别
+			//添加地图类型控件
+			var size1 = new BMap.Size(10, 50);
+			map.addControl(
+			  new BMap.MapTypeControl({
+			    offset: size1,
+			    mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP],
+			  })
+			);
+			
+			
+			map.setCurrentCity("成都"); // 设置地图显示的城市 此项是必须设置的
+			map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+			//设备地图颜色
+			var mapStyle = {
+			  style: "midnight",
+			};
+			map.setMapStyle(mapStyle);
+			
+			//加载城市控件
+			var size = new BMap.Size(10, 50);
+			map.addControl(
+			  new BMap.CityListControl({
+			    anchor: BMAP_ANCHOR_TOP_LEFT,
+			    offset: size,
+			  })
+			);
+			
+		},
+		async getData(){
+		  const {data: res} = await this.$http.get("LBS/baiduHy/cdIn");
+		  return res.data;
+		},
+		//根据名字获取对应地名的坐标
+		getCoord(name){
+			var myGeo = new BMap.Geocoder();
+			var point = myGeo.getPoint(myGeo);
+		}
+	},
 }
 </script>
 
@@ -218,11 +120,25 @@ export default {
   /* 引入外部css样式 */
   @import "../../assets/css/urbanPublicSafety/base.css";
   @import "../../assets/css/urbanPublicSafety/zTreeStyle/zTreeStyle.css";
-  .centerTitle{
-  font-size:3.6rem;
+#health {
+    width: 100vw;
+    height: 100vh;
+    background-color: #10171E !important;
+  }
+.centerTitle{
+  font-size:2rem !important;
   margin:0 auto;
 }
 .dhTitle{
   font-size:1.5rem;
+}
+
+.header {
+  height: 8vh !important;
+}
+
+.con{
+	height: 92vh;
+	background-color: #10171E !important;
 }
 </style>

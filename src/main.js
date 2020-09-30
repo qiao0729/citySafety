@@ -40,6 +40,14 @@ Vue.use(AFTableColumn)
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
+//导入DataV组件
+//方式1：全局导入
+// import DataV from '@jiaminghi/data-view'
+// Vue.use(DataV)
+
+//方式2：按需导入
+// import {borderBox1} from '@jiaminghi/data-view'
+// Vue.use(borderBox1)
 
 //全局配置axios
 import axios from 'axios'

@@ -229,11 +229,27 @@ export default {
     async test(){
       var data = await this.test1();
       console.log(data);
+
+      //webscoket测试
+       /* var wsObj = new WebSocket("ws://127.0.0.1:8888");   //建立连接
+        wsObj.onopen = function(){  //发送请求
+            console.log("open");
+            wsObj.send("Hello WebSocket");
+        };
+        wsObj.onmessage = function(ev){  //获取后端响应
+            console.log(ev.data);
+        };
+        wsObj.onclose = function(ev){
+            console.log("close");
+        };
+        wsObj.onerror = function(ev){
+            console.log("error");
+        }; */
     },
-    async test1(){
-      const {data: res} = await this.$http.get("linkMysql/mysqlTest");
-      return res.data;
-    },
+        async test1(){
+          const {data: res} = await this.$http.get("linkMysql/mysqlTest");
+          return res.data;
+        },
 	
 	//利用mapbox来实现3D地图  实现建筑的渐变色渲染
 	centerMap() {
@@ -992,7 +1008,7 @@ export default {
   height: 100vh;
 }
 .centerTitle {
-  font-size: 3.6rem;
+  font-size: 2rem;
   margin: 0 auto;
 }
 .dhTitle {

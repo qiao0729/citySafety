@@ -785,7 +785,7 @@
 					markerArr.push(this.createMark(item, map));
 				}
 
-				console.log(markerArr);
+				//console.log(markerArr);
 				map.add(markerArr);
 
 				//给标注添加点击事件
