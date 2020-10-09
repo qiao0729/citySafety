@@ -1170,6 +1170,7 @@ export default {
       });
     },
     clickStopRealPlay: function () {
+    var that = this;
 		var windNum = that.iWndowType * that.iWndowType +1;
 		
 		var j = this.hkvInfo.channels.length > windNum ? windNum : this.hkvInfo.channels.length;
