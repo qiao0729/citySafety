@@ -1,0 +1,28 @@
+.leftContent{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 25%;
+	border: #030829 1px solid;
+}
+.centerContent{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 25%;
+	width: 50%;
+	padding: 0 .078125rem;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border: #030829 1px solid;
+}
+
+.rightContent{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 25%;
+	border: #030829 1px solid;
+}

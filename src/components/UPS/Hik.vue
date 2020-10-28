@@ -8,11 +8,13 @@
            <span class="el-dropdown-link">自然灾害<i class="el-icon-arrow-down el-icon--right"></i></span>
            </div>
            <el-dropdown-menu slot="dropdown" class="dropdown" >
-              <li class="dhTitle"><router-link  :to="{ name: 'urbanPublicSafety'}">信息总览</router-link></li>
-              <li class="dhTitle"><router-link :to="{ name: 'Accident'}">事故灾难</router-link></li>
-              <li class="dhTitle"> <router-link  :to="{ name: 'Health'}">公共安全</router-link></li>
-              <li class="dhTitle"><router-link  :to="{ name: 'Social'}">社会安全</router-link></li>
-              <li class="dhTitle"><router-link  :to="{ name: 'Warning'}">预警信息</router-link></li>
+			 <li class="dhTitle"><router-link  :to="{ name: 'urbanPublicSafety'}">信息总览</router-link></li>
+             <li class="dhTitle"><router-link  :to="{ name: 'Hik'}">自然灾害</router-link></li>
+             <li class="dhTitle"><router-link :to="{ name: 'Accident'}">事故灾难</router-link></li>
+             <li class="dhTitle"> <router-link  :to="{ name: 'Health'}">公共安全</router-link></li>
+             <li class="dhTitle"><router-link  :to="{ name: 'Social'}">社会安全</router-link></li>
+             <li class="dhTitle"><router-link  :to="{ name: 'Warning'}">预警信息</router-link></li>
+             <li class="dhTitle"><router-link  :to="{ name: 'Trace'}">轨迹挖掘</router-link></li>
             </el-dropdown-menu>
          </el-dropdown>
          
@@ -119,9 +121,8 @@
 <script>
 	// import "../../static/hik/china.js";
 	import "../../static/hik/index.js";
-	import {
-		WebVideoCtrl
-	} from "../../static/webVideoCtrl.js";
+	import { WebVideoCtrl } from "../../static/webVideoCtrl.js";
+	import echarts from 'echarts';
 	export default {
 		data() {
 			return {

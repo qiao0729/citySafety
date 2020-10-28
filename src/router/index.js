@@ -15,6 +15,9 @@ import Warning from '../components/UPS/Warning.vue'
 //海康威视视频展示
 import Hik from '../components/UPS/Hik.vue'
 
+//出租车轨迹挖掘
+import Trace from '../components/UPS/Trace.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -74,6 +77,12 @@ Vue.use(VueRouter)
 		path: '/Hik',
 		name: 'Hik',
 		component: Hik
+	},
+	//车辆轨迹挖掘
+	{
+		path: '/Trace',
+		name: 'Trace',
+		component: Trace
 	},
   
 
