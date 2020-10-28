@@ -34,7 +34,9 @@ Vue.prototype.$x2js = new x2js() //创建x2js对象，挂到vue原型上
 //引入element ui列宽自适应组件
 import ElementUI from 'element-ui'
 import AFTableColumn from 'af-table-column'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(AFTableColumn)
+Vue.use(ElementUI)
 
 //导入首页粒子插件
 import VueParticles from 'vue-particles'

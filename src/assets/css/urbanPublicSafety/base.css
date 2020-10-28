@@ -41,12 +41,12 @@ a:hover{
 
 }
 .header_center{
-    width: 30%;
+    width: 50%;
     margin: 0px auto;
     color: #FFFFff;
     text-align: center;
     height: 80px;
-    background-image: url("../img/logoBg.png");
+    /* background-image: url("../img/logoBg.png"); */
     background-size: 100% 100%;
     font-family: "微软雅黑"!important;
 
@@ -72,7 +72,7 @@ a:hover{
 }
 .nav{
 
-    width: 35%;
+    width: 25%;
 }
 .nav>ul{
 

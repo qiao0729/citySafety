@@ -2,47 +2,119 @@
   <div id="health">
     <meta charset="UTF-8">
     <title>公共卫生安全</title>
-     <!--顶部-->
-    <header class="header left">
-      <div class="left nav">
-        <ul>
-          <li >
-            <i class="nav_1"></i>
-            <router-link class="dhTitle" :to="{ name: 'urbanPublicSafety'}">信息总览</router-link>
-          </li>
-          <li>
-            <i class="nav_2"></i>
-             <router-link class="dhTitle" :to="{ name: 'Nature'}">自然灾害</router-link>
-          </li>
-          <li>
-            <i class="nav_3"></i>
-            <router-link class="dhTitle" :to="{ name: 'Accident'}">事故灾难</router-link>
-          </li>
-        </ul>
+     <!--顶部-->   
+    <div class="header">
+		<div class="left nav left-box">
+            <el-dropdown hide-on-click>
+              <div class="menu_title">
+              <i class="el-icon-s-unfold"></i>
+           <span class="el-dropdown-link">公共安全<i class="el-icon-arrow-down el-icon--right"></i></span>
+           </div>
+           <el-dropdown-menu slot="dropdown" class="dropdown" >
+              <li class="dhTitle"><router-link  :to="{ name: 'urbanPublicSafety'}">信息总览</router-link></li>
+              <li class="dhTitle"><router-link :to="{ name: 'Hik'}">自然灾害</router-link></li>
+              <li class="dhTitle"> <router-link  :to="{ name: 'Social'}">事故灾难</router-link></li>
+              <li class="dhTitle"><router-link  :to="{ name: 'Social'}">社会安全</router-link></li>
+              <li class="dhTitle"><router-link  :to="{ name: 'Warning'}">预警信息</router-link></li>
+            </el-dropdown-menu>
+         </el-dropdown>
+         
       </div>
       <div class="header_center left">
-       <span class='centerTitle'>
+        <h1 class="centerTitle">
           城市公共安全信息监测系统
-        </span> 
+          <img src="../../assets/img/title_left.png" class="title_left" />
+          <img src="../../assets/img/title_right.png" class="title_right" />
+        </h1>
+        <!-- 时钟 -->
+        <span class="time_">{{dateFormat(date)}}</span>
       </div>
-      <div class="right nav text_right">
-        <ul>
-          <li class="nav_active">
-            <i class="nav_7"></i>
-            <router-link class="dhTitle" :to="{ name: 'Health'}">公共安全</router-link>
-          </li>
-          <li>
-            <i class="nav_8"></i>
-             <router-link class="dhTitle" :to="{ name: 'Social'}">社会安全</router-link>
-          </li>
-          <li>
-            <i class="nav_4"></i>
-           <router-link class="dhTitle" :to="{ name: 'Warning'}">预警信息</router-link>
-          </li>
-        </ul>
-      </div>
-    </header>
+      <!-- 头部右侧区域 -->
+      <div class="right nav text_right" >
+               <el-dropdown size="mini" hide-on-click placement="bottom-start" >
+              <div class="el-dropdown-left">
+           <span class="el-dropdown-link"><img src="../../assets/img/header.png" alt=""></span> 
+           </div>
+           <el-dropdown-menu slot="dropdown" class="dropdown1"  >
+              <li><router-link class="dhTitle dhTitle1" :to="{ name: 'Login'}">退出系统</router-link></li>
+            </el-dropdown-menu>
+         </el-dropdown>
+         </div>
+    </div>
+    <!-- 中间部分 -->
+    <div class="mgs-handle">
+   <el-row v-model="baiduQx_query">
+       <el-col :span="1" class="msg-col"></el-col>
+  <el-col :span="3" class="msg-col" @click.native="moveIn()">迁入来源地</el-col>
+  <el-col :span="1" class="msg-col" ></el-col>
+  <el-col :span="3" class="msg-col" @click.native="moveOut()">迁出目的地</el-col>
+  <el-col :span="1" class="msg-col"></el-col>
+  <el-col :span="10" class="msg-col">城内出行强度</el-col>
+  <el-col :span="3" class="msg-col">
+      <div class="input_mgs">
+   <el-select v-model="value" placeholder="请选择日期" @change="selectTrigger">
+    <el-option
+      v-for="item in cdinOptions"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </div>
+  </el-col>
+</el-row>
+</div>
+<!-- 右侧列表区域 -->
+<div class="mgs-list">
+    <div id="mgs-list-in" >迁入成都来源地</div>
+    <div id="mgs-list-out">成都迁出目的地</div>
+    <div class=mgs-list-box>
+                <table>
+                    <thead>
+                        <tr >
+                            <th style="width:80px"></th>
+                             <el-radio-group v-model="radio" @change="handleChange">
+                                 <th><el-radio label="1" @change.native="cityRank()">城市级别</el-radio></th> 
+                                 <th><el-radio  label="2" @change.native="provinceRank()">省份级别</el-radio></th>
+                                </el-radio-group> 
+                            <!-- <th style="width: 110px;text-align: left;" @click="handleChange1" > <input type="radio" name="1"  checked> <label for="1">城市级别</label></th>
+                            <th style="width: 200px;text-align: center; " @click="handleChange1"><input type="radio" name="1"> <label for="1">省份级别</label></th> -->
+                            
+                        </tr>
+                        <tr>
+                            <th style="width:80px"></th>
+                            <th style="width: 80px;text-align: left; font-size:18px; color: #999 ">名称</th>
+                            <th style="width: 100px;text-align: left; font-size:18px; color: #999"   >比例(%)</th>
+                        </tr>
+                    </thead>
+                    <!-- 城市级别区域数据 -->
+                    
+                    <tbody :data='cdInData' v-show="isShow" >
+                        <tr v-for="(item, index) in cdInData" :key="index" >
+                            <td style="width:80px;height:30px"><span v-text="index+1"  class="list-rank-icon"></span></td>
+                            <td style="width: 80px;text-align: center; height:30px">
+                                <div>
+                                    <span class="mgs-date-city ">{{item.city_name}}</span>
+                                    <span class="mgs-date-province">{{item.province_name}}</span>
+                                </div>
+                            </td>
+                            <td style="width: 100px;text-align: left; height:30px; color: #999" >{{item.value}}</td>
+                        </tr>
+                    </tbody>
+                    
+                    <!-- 省份级别的数据  -->
+                      <tbody :data='cdInData' v-show="!isShow">
+                        <tr v-for="(item, index) in cdInData" :key="index">
+                            <td style="width:80px;height:30px"><span v-text="index+1"  class="list-rank-icon"></span></td>
+                            <td style="width: 80px;text-align: left; height:30px; color: #999" >{{item.province_name}}</td>
+                            <td style="width: 100px;text-align: left; height:30px; color: #999" >{{item.value}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+    </div>
+</div>
     <!--内容部分-->
+    <!-- 准备dom放echarts图表 -->
 <div class="con left" id="map_qx">
 </div>
   </div>
@@ -65,12 +137,257 @@ export default {
             chinaDatas:[],
             targetCity:'成都市',
             targetCoord:[104.06, 30.67],
-		}
+            date:new Date(),
+            num:0,
+            radio: '1',
+            isShow: true,
+          cdinOptions: [ {
+          value: '20200315',
+          label: '2020-03-15'
+        },{
+          value: '20200314',
+          label: '2020-03-14'
+        },{
+          value: '20200313',
+          label: '2020-03-13'
+        },{
+          value: '20200312',
+          label: '2020-03-12'
+        },{
+          value: '20200311',
+          label: '2020-03-11'
+        },{
+          value: '20200310',
+          label: '2020-03-10'
+        },{
+          value: '20200309',
+          label: '2020-03-09'
+        },{
+          value: '20200308',
+          label: '2020-03-08'
+        },{
+          value: '20200307',
+          label: '2020-03-07'
+        },{
+          value: '20200306',
+          label: '2020-03-06'
+        },{
+          value: '20200305',
+          label: '2020-03-05'
+        },{
+          value: '20200304',
+          label: '2020-03-04'
+        },{
+          value: '20200303',
+          label: '2020-03-03'
+        },{
+          value: '20200302',
+          label: '2020-03-02'
+        },{
+          value: '20200301',
+          label: '2020-03-01'
+        },{
+          value: '20200229',
+          label: '2020-02-29'
+        },{
+          value: '20200228',
+          label: '2020-02-28'
+        },{
+          value: '20200227',
+          label: '2020-02-27'
+        },{
+          value: '20200226',
+          label: '2020-02-26'
+        },{
+          value: '20200225',
+          label: '2020-02-25'
+        },{
+          value: '20200224',
+          label: '2020-02-24'
+        },{
+          value: '20200223',
+          label: '2020-02-23'
+        },{
+          value: '20200222',
+          label: '2020-02-22'
+        },{
+          value: '20200221',
+          label: '2020-02-21'
+        },{
+          value: '20200220',
+          label: '2020-02-20'
+        },{
+          value: '20200219',
+          label: '2020-02-19'
+        },{
+          value: '20200218',
+          label: '2020-02-18'
+        },{
+          value: '20200217',
+          label: '2020-02-17'
+        },{
+          value: '20200216',
+          label: '2020-02-16'
+        },{
+          value: '20200215',
+          label: '2020-02-15'
+        },{
+          value: '20200214',
+          label: '2020-02-14'
+        },{
+          value: '20200213',
+          label: '2020-02-13'
+        },{
+          value: '20200212',
+          label: '2020-02-12'
+        },{
+          value: '20200211',
+          label: '2020-02-11'
+        },{
+          value: '20200210',
+          label: '2020-02-10'
+        },{
+          value: '20200209',
+          label: '2020-02-09'
+        },{
+          value: '20200208',
+          label: '2020-02-08'
+        },{
+          value: '20200207',
+          label: '2020-02-07'
+        },{
+          value: '20200206',
+          label: '2020-02-06'
+        },{
+          value: '20200205',
+          label: '2020-02-05'
+        },{
+          value: '20200204',
+          label: '2020-02-04'
+        },{
+          value: '20200203',
+          label: '2020-02-03'
+        },{
+          value: '20200202',
+          label: '2020-02-02'
+        },{
+          value: '20200201',
+          label: '2020-02-01'
+        },{
+          value: '20200131',
+          label: '2020-01-31'
+        },{
+          value: '20200130',
+          label: '2020-01-30'
+        },{
+          value: '20200129',
+          label: '2020-01-29'
+        },{
+          value: '20200128',
+          label: '2020-01-28'
+        },{
+          value: '20200127',
+          label: '2020-01-27'
+        },{
+          value: '20200126',
+          label: '2020-01-26'
+        },{
+          value: '20200125',
+          label: '2020-01-25'
+        },{
+          value: '20200124',
+          label: '2020-01-24'
+        },{
+          value: '20200123',
+          label: '2020-01-23'
+        },{
+          value: '20200122',
+          label: '2020-01-22'
+        },{
+          value: '20200121',
+          label: '2020-01-21'
+        },{
+          value: '20200120',
+          label: '2020-01-20'
+        },{
+          value: '20200119',
+          label: '2020-01-19'
+        },{
+          value: '20200118',
+          label: '2020-01-18'
+        },{
+          value: '20200117',
+          label: '2020-01-17'
+        },{
+          value: '20200116',
+          label: '2020-01-16'
+        },{
+          value: '20200115',
+          label: '2020-01-15'
+        },{
+          value: '20200114',
+          label: '2020-01-14'
+        },{
+          value: '20200113',
+          label: '2020-01-13'
+        },{
+          value: '20200112',
+          label: '2020-01-12'
+        },{
+          value: '20200111',
+          label: '2020-01-11'
+        }],
+        value: '',
+         baiduQx_query:{
+        date:'20200111',//日期
+        type:'move_in',//类型：是迁入还是迁出
+        rank:'city'//等级：是城市级别还是省级别
+      }
+            
+        // 时间选择器
+        //value1: '',
+        //     pickerOptions: {
+        //   disabledDate(time) {
+        //     return time.getTime() > Date.now();
+        //   },
+        //   shortcuts: [{
+        //     text: '今天',
+        //     onClick(picker) {
+        //       picker.$emit('pick', new Date());
+        //     }
+        //   }, {
+        //     text: '昨天',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }, {
+        //     text: '一周前',
+        //     onClick(picker) {
+        //       const date = new Date();
+        //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+        //       picker.$emit('pick', date);
+        //     }
+        //   }]
+        // }
+        }
+        
 	},
 	mounted(){
 		this.$nextTick(function(){
 			this.baiduQx();//百度迁徙模拟加载
-		})
+        }),
+        //显示当前日期时间
+          //let _this = this// 声明一个变量指向Vue实例this，保证作用域一致
+          this.timer = setInterval(() => {
+           this.date = new Date(); // 修改数据date
+           }, 1000)
+       },
+      beforeDestroy() {
+       if (this.timer) {
+        clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
+      }
 	},
 	watch: {
 		chinaDatas(newValue, oldValue){
@@ -78,17 +395,96 @@ export default {
 				this.showData();
 			}
 		}
-	},
+    },
+   
 
 	//利用watcher来监听数据
 	methods: {
-		//百度迁徙模拟
-	async	baiduQx(){
+        //城市级别和省份级别的切换
+        handleChange(val){
+            let that = this
+            that.isShow=(val==='1')?true:false
+        },
+         handleChange1(){
+           this.num = this.num ? 0 : 1
+        },
+        dateFormat(time) {
+          var date=new Date(time);
+          var year=date.getFullYear();
+          /* 在日期格式中，月份是从0开始的，因此要加0
+          * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+          * */
+          var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+          var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
+          var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
+          var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
+          var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+          // 拼接
+          return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+      },
+        //切换单选框
+        tabChange:function(e){
+						let tabid = e.target.dataset.id
+                        this.tab = tabid
+                        },
+       //城市级别
+       cityRank(){
+           this.baiduQx_query.rank = 'city'
+           this.baiduQx()
+       },
+
+       // 省份级别
+       provinceRank(){
+           this.baiduQx_query.rank = 'province'
+           this.baiduQx()
+       },
+
+       //迁入来源地
+       moveIn() {
+         
+        document.getElementById('mgs-list-in').style.display = "block"
+        document.getElementById('mgs-list-out').style.display = "none"
+        this.baiduQx_query.type = 'move_in'
+        this.baiduQx()
+       },
+       //迁出来源地
+        moveOut() {
+        document.getElementById('mgs-list-in').style.display = "none"
+        document.getElementById('mgs-list-out').style.display = "block"
+        this.baiduQx_query.type = 'move_out'
+        this.baiduQx()
+       },
+       selectTrigger(e){ 
+        // var dateOption = []
+        // this.cdinOptions.forEach((item)=>{
+        //     dateOption.push(item.label)
+        // })
+        //     console.log(dateOption[0])
+        //     this.baiduQx_query.date = dateOption[0]
+        //     debugger
+        this.baiduQx_query.date = this.value;
+        this.baiduQx()
+        this.showData()
+        },
+        
+       async getData(){
+          const {data: res} = await this.$http.get("LBS/baiduHy/cdIn",{params:this.baiduQx_query});
+          console.log(res.data)
+		  return res.data;
+		},
+       //百度迁徙
+	   async baiduQx(){
 			//连接后端接口获取数据
             this.cdInData = await this.getData();
             console.log(this.cdInData)
-			var that = this;
-		
+            var that = this;
+
+//chinaGeoCoordMap用于装各城市的坐标数据；
+// chinaDatas装城市的名字数据；
+// convertData这个方法控制箭头流向；
+//series里设置被攻击点（中心点）；
+// option中设置一些整体效果，tooltip中负责悬浮框内容和格式的设置;
+
 	//根据获取的数据构造chinaGeoCoordMap 和 chinaDatas  注意：chinaDatas中的value需为获取后端value除以100
 			for(let item of this.cdInData){
 				var myGeo = new BMap.Geocoder();//注：该处要加上市才能正确的解析
@@ -108,19 +504,23 @@ export default {
 					 }
 			});
 			}
-		
 		},
-
+	//根据地址描述获得坐标,百度地图描述获得坐标 百度地图API提供Geocoder类进行地址解析 可以通过Geocoder.getPoint()方法将一段地址描述转换成一个坐标 这一段和上面重复 本质上都是获取坐标
+		// getCoord(name){
+		// 	var that = this;
+        //     var myGeo = new BMap.Geocoder();//创建地址解析器实例
+        // // 将地址解析结果显示在地图上,并调整地图视野
+		// 	myGeo.getPoint(name, async function(point){
+		// 		var coord = [point.lng,point.lat];
+		// 		that.coordMap.set(name,coord);
+		// 		//return point;
+		// 	});
+		// },
 		showData(){
             var that = this;
-            
             //往chinaGeoCoordMap里push进目标结点的坐标
             that.chinaGeoCoordMap[that.targetCity] = that.targetCoord;
-
-
-            var myChart = this.$echarts.init(document.getElementById('map_qx'));
-            
-
+            var myChart = this.$echarts.init(document.getElementById('map_qx'));//使用china.js地图初始化方式
         var convertData = function(data) {
             var res = [];
             for(var i = 0; i < data.length; i++) {
@@ -337,21 +737,9 @@ export default {
 		// 	  })
 		// 	);
 			
-		// },
-		async getData(){
-		  const {data: res} = await this.$http.get("LBS/baiduHy/cdIn");
-		  return res.data;
-		},
-		//根据名字获取对应地名的坐标
-		getCoord(name){
-			var that = this;
-			var myGeo = new BMap.Geocoder();
-			myGeo.getPoint(name, async function(point){
-				var coord = [point.lng,point.lat];
-				that.coordMap.set(name,coord);
-				//return point;
-			});
-		}
+        // },
+        
+	
 	},
 }
 </script>
@@ -365,16 +753,275 @@ export default {
     height: 100vh;
     background-color: #10171E !important;
   }
+.el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
+    background-color: rgb(15,41,103) !important;
+}
+.input_mgs{
+    width: 180px;
+}
+.el-input__inner {
+    -webkit-appearance: none;
+    background-color: rgb(7,11,15) !important;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid  rgb(41,115,255) !important;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 29px !important;
+    line-height: 30px !important;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100% !important;
+} 
+  .el-select-dropdown__list {
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: rgb(3,8,41);
+    border: 1px solid #2977ff !important;
+    vertical-align: center;
+    width:100%;
+}
+.el-select-dropdown {
+    position: absolute;
+    z-index: 1001;
+    border: 1px solid #2977ff !important;
+    border-radius: 4px;
+    background-color: #FFF;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    box-sizing: border-box;
+    margin: 5px 0;
+}
+  /* 时间选择器 */
+  .mgs-list-box tr td{ 
+      border-bottom:1px solid rgb(108,113,118)
+      }
+.el-input__icon {
+    height: 100%;
+    width: 90px!important ;
+    text-align: center;
+    transition: all .3s;
+    line-height: 30px !important;
+}
+.el-picker-panel {
+    color: #606266;
+    border: 1px solid  rgb(41,115,255) !important;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    background: rgb(7,11,15) !important;
+    border-radius: 4px;
+    line-height: 30px !important ;
+    margin: 5px 0;
+    /* left:1168px !important; */
+}
+.el-date-table td.disabled div {
+    background-color:  rgb(34,46,60) !important;
+    opacity: 1;
+    cursor: not-allowed;
+    color: #C0C4CC;
+}
+.el-picker-panel [slot=sidebar], .el-picker-panel__sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 66px !important;
+    border-right: 1px solid rgb(41,115,255) !important;
+    box-sizing: border-box;
+    padding-top: 6px;
+    background-color: rgb(7,11,15) !important;
+    overflow: auto;
+}
+.el-picker-panel [slot=sidebar]+.el-picker-panel__body, .el-picker-panel__sidebar+.el-picker-panel__body {
+    margin-left: 53px !important;
+}
+.el-date-picker.has-sidebar {
+    width: 365px !important;
+}
+.el-input__inner {
+    -webkit-appearance: none;
+    background-color: rgb(7,11,15) !important;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid  rgb(41,115,255) !important;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 29px !important;
+    line-height: 30px !important;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 80% !important;
+} 
+.mgs-date-city {
+    color: rgba(232,195,55,.8);
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+    margin: 10px 0 0;
+}
+.mgs-date-province {
+    color: #999;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+}
+.list-rank-icon {
+    display: inline-block;
+    background: #e75843;
+    color: #fff;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    width: 20px !important;
+    height: 16px  !important;
+    line-height: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+
+  #mgs-list-in{
+    height: 30px;
+    margin: 0;
+    line-height: 10px;
+    text-align: center;
+    color: #ddd;
+    font-size: 20px;
+    
+  }
+  #mgs-list-out{
+    height: 30px;
+    margin: 0;
+    line-height: 10px;
+    text-align: center;
+    color: #ddd;
+    font-size: 20px;
+     display:none;
+  }
+  .mgs-list{
+     padding-top: 20px;
+     font-family: PingFang SC,Microsoft Yahei,monospace;
+    float:right;
+    top: 75px;
+    overflow: auto;
+    right: 0;
+    width: 360px;
+    background: rgb(7,11,15);
+    bottom: 35px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .left-box {
+    width: 25%;
+    height: 58px !important;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0px 0.104167rem;
+    margin: 0 auto;
+}
+
+ .el-dropdown-link {
+    cursor: pointer;
+    color: #c0c4cc;
+  }
+.el-dropdown-left{
+  margin-right: 35px;
+  margin-top:30px;
+  
+}
+.centerTitle {
+  font-size: 2rem !important;
+  margin: 0 auto;
+  font-family: SourceHanSansCN-Bold, SourceHanSansCN;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 2px;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fff),
+    to(#4589ff)
+  );
+  background: linear-gradient(180deg, #fff, #4589ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dhTitle {
+  font-size: 1rem;
+  padding:0.6rem;
+  color:#c0c4cc;
+}
+
+.dhTitle a{
+  color:#c0c4cc !important; 
+}
+.menu_title {
+        /* margin: 0 auto; */
+         margin-top:22px; 
+        margin-left: 20px;
+        vertical-align: middle;
+        line-height: 0.166667rem !important;
+        /* color:  #034c6a ; */
+        font-size: 22px;
+        border: 1px solid #2977ff;
+}
+.dropdown {
+  background-color:rgb(3,8,41);
+  /* opacity: 0.9; */
+  border: 1px solid #2977ff;
+  width: 135px;
+  text-align: center;
+}
+.dropdown1 {
+  background-color:rgb(3,8,41);
+  /* opacity: 0.9; */
+  border: 1px solid #2977ff;
+  width: 95px;
+  text-align: center;
+  
+}
+ li:hover{
+  background-color:#0f2967;
+  color:#fff
+}
+.time_{
+  position: absolute;
+    margin-top: 4px;
+    margin-left: -70px;
+}
 .centerTitle{
   font-size:2rem !important;
   margin:0 auto;
 }
-.dhTitle{
-  font-size:1.5rem;
+.mgs-handle {
+    width: 100%;
+    height: 46px;
+    background-color: rgba(7,11,15);
+    display: left;
+    color:rgb(90,155,255);
+    z-index: 1;
 }
-
-.header {
-  height: 8vh !important;
+.msg-col{
+    margin-top: 10px;
+} 
+.msg-col:active{
+    color:red;
+} 
+.header_center{
+    height:58px;
 }
 
 .con{
@@ -383,7 +1030,7 @@ export default {
 }
 
 #map_qx{
-	width: 100%;
-	height:92vh;
+	width: 70%;
+	height:88vh;
 }
 </style>
