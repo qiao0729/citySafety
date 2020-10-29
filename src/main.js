@@ -42,6 +42,8 @@ Vue.use(ElementUI)
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
+
+
 //导入DataV组件
 //方式1：全局导入
 // import DataV from '@jiaminghi/data-view'
