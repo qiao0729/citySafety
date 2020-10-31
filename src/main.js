@@ -42,6 +42,11 @@ Vue.use(ElementUI)
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
+//使用loadsh进行数组操作
+import _ from 'loadsh'
+Vue.prototype._ = _;
+
+
 
 
 //导入DataV组件

@@ -10,8 +10,9 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 25%;
-	width: 50%;
+	/* left: 25%; */
+	left: 0;
+	width: 75%;
 	padding: 0 .078125rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -25,4 +26,52 @@
 	right: 0;
 	width: 25%;
 	border: #030829 1px solid;
+}
+
+/* 地图不显示放大缩小按钮 */
+.tmap-zoom-control{
+	display: none !important;
+}
+
+
+/* 地图不显示比例尺按钮 */
+.tmap-scale-control{
+	display: none !important;
+}
+
+/* 设置左上角图片 */
+.imgTopL{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 5.40625rem;
+	height: 5.322916666666667rem;
+	z-index: 0;
+}
+
+.imgTopR{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: .40625rem;
+	height: .322916666666667rem;
+	z-index: 0;
+}
+
+.imgBottomL{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: .40625rem;
+	height: .322916666666667rem;
+	z-index: 0;
+}
+
+.imgBottomR{
+	position: absolute;
+	right: 3%;
+	bottom: 0;
+	width: 5.40625rem;
+	height: 5.322916666666667rem;
+	z-index: 0;
 }
