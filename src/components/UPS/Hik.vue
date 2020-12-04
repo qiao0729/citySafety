@@ -8,35 +8,18 @@
            <span class="el-dropdown-link">自然灾害<i class="el-icon-arrow-down el-icon--right"></i></span>
            </div>
            <el-dropdown-menu slot="dropdown" class="dropdown" >
-			 <li class="dhTitle"><router-link  :to="{ name: 'urbanPublicSafety'}">信息总览</router-link></li>
-             <li class="dhTitle"><router-link  :to="{ name: 'Hik'}">自然灾害</router-link></li>
-             <li class="dhTitle"><router-link :to="{ name: 'Accident'}">事故灾难</router-link></li>
-             <li class="dhTitle"> <router-link  :to="{ name: 'Health'}">公共安全</router-link></li>
-             <li class="dhTitle"><router-link  :to="{ name: 'Social'}">社会安全</router-link></li>
-             <li class="dhTitle"><router-link  :to="{ name: 'Warning'}">预警信息</router-link></li>
-             <li class="dhTitle"><router-link  :to="{ name: 'Trace'}">轨迹挖掘</router-link></li>
+						 	<dropMenu></dropMenu>
             </el-dropdown-menu>
          </el-dropdown>
          
       </div>
       <div class="header_center left">
-        <h1 class="centerTitle">
-          城市公共安全信息监测系统
-          <img src="../../assets/img/title_left.png" class="title_left" />
-          <img src="../../assets/img/title_right.png" class="title_right" />
-        </h1>
-        <!-- 时钟 -->
-        <span class="time_">{{dateFormat(date)}}</span>
+        <timeRecord></timeRecord>
       </div>
       <!-- 头部右侧区域 -->
       <div class="right nav text_right" >
-               <el-dropdown size="mini" hide-on-click placement="bottom-start" >
-              <div class="el-dropdown-left">
-           <span class="el-dropdown-link"><img src="../../assets/img/header.png" alt=""></span>
-           </div>
-           <el-dropdown-menu slot="dropdown" class="dropdown1"  >
-              <li><router-link class="dhTitle dhTitle1" :to="{ name: 'Login'}">退出系统</router-link></li>
-            </el-dropdown-menu>
+          <el-dropdown size="mini" hide-on-click placement="bottom-start" >
+            <titleRight></titleRight>
          </el-dropdown>
          </div>
 		</div>
@@ -123,7 +106,15 @@
 	import "../../static/hik/index.js";
 	import { WebVideoCtrl } from "../../static/webVideoCtrl.js";
 	import echarts from 'echarts';
+	import dropMenu from '../publicComponents/dropMenu'
+	import titleRight from '../publicComponents/titleRight'
+  import timeRecord from '../publicComponents/timeRecord'
 	export default {
+		components: {
+      dropMenu,
+      titleRight,
+      timeRecord
+    },
 		data() {
 			return {
 				fontColor: "#fff",
@@ -203,7 +194,6 @@
 
 				//展示一天实时的天气时的数据
 				hoursData: [],
-				date:new Date()
 			};
 		},
 		mounted() {
@@ -234,18 +224,8 @@
 						that.getTime();
 					}, 1000);
 				}
-			}),
-			 //显示当前日期时间
-          //let _this = this// 声明一个变量指向Vue实例this，保证作用域一致
-          this.timer = setInterval(() => {
-           this.date = new Date(); // 修改数据date
-           }, 1000)
-       },
-      beforeDestroy() {
-       if (this.timer) {
-        clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
-      }
-		},
+			})
+    },
 		//vue实例销毁的时候清除定时器
 		destroyed() {
 			clearInterval(this.timer);
@@ -253,20 +233,6 @@
 			this.onLogout();
 		},
 		methods: {
-			dateFormat(time) {
-          var date=new Date(time);
-          var year=date.getFullYear();
-          /* 在日期格式中，月份是从0开始的，因此要加0
-          * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-          * */
-          var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-          var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-          var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-          var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-          var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
-          // 拼接
-          return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
-      },
 			getWeatherData() {
 				var self = this;
 				//调用的天气API 的免费实况天气接口

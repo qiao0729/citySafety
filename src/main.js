@@ -4,6 +4,10 @@ import router from './router'
 import './plugins/element.js'
 import echarts from 'echarts'
 
+
+//使用vuex进行全局变量的存储
+import store from './store/index.js'
+
 //导入字体图标
 import './assets/fonts/iconfont.css'
 
@@ -48,7 +52,6 @@ Vue.prototype._ = _;
 
 
 
-
 //导入DataV组件
 //方式1：全局导入
 // import DataV from '@jiaminghi/data-view'
@@ -76,7 +79,7 @@ switch (hostname){
 		axios.defaults.baseURL = 'http://192.168.11.254:8888/api/private/v1/';
 		break;
 	case 'localhost':
-		axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/';
+		axios.defaults.baseURL = 'http://192.168.128.9:8888/api/private/v1/';
 		break;
 	case '192.168.128.9':
 		axios.defaults.baseURL = 'http://192.168.128.9:8888/api/private/v1/';
@@ -98,6 +101,7 @@ Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')

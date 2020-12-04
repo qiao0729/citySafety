@@ -5,43 +5,27 @@
     <!--顶部-->
     <header class="header left">
       <div class="left nav left-box">
-            <el-dropdown hide-on-click>
-              <div class="menu_title">
-              <i class="el-icon-s-unfold"></i>
-           <span class="el-dropdown-link">信息总览<i class="el-icon-arrow-down el-icon--right"></i></span>
-           </div>
-           <el-dropdown-menu slot="dropdown" class="dropdown" >
-			  <li class="dhTitle"><router-link  :to="{ name: 'urbanPublicSafety'}">信息总览</router-link></li>
-              <li class="dhTitle"><router-link  :to="{ name: 'Hik'}">自然灾害</router-link></li>
-              <li class="dhTitle"><router-link :to="{ name: 'Accident'}">事故灾难</router-link></li>
-              <li class="dhTitle"> <router-link  :to="{ name: 'Health'}">公共安全</router-link></li>
-              <li class="dhTitle"><router-link  :to="{ name: 'Social'}">社会安全</router-link></li>
-              <li class="dhTitle"><router-link  :to="{ name: 'Warning'}">预警信息</router-link></li>
-			  <li class="dhTitle"><router-link  :to="{ name: 'Trace'}">轨迹挖掘</router-link></li>
-            </el-dropdown-menu>
-         </el-dropdown>
-         
+        <el-dropdown hide-on-click>
+          <div class="menu_title">
+            <i class="el-icon-s-unfold"></i>
+            <span class="el-dropdown-link"
+              >信息总览<i class="el-icon-arrow-down el-icon--right"></i
+            ></span>
+          </div>
+          <el-dropdown-menu slot="dropdown" class="dropdown">
+            <dropMenu></dropMenu>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <div class="header_center left">
-        <h1 class="centerTitle">
-          城市公共安全信息监测系统
-          <img src="../assets/img/title_left.png" class="title_left" />
-          <img src="../assets/img/title_right.png" class="title_right" />
-        </h1>
-        <!-- 时钟 -->
-        <span class="time_">{{dateFormat(date)}}</span>
+        <timeRecord></timeRecord>
       </div>
       <!-- 头部右侧区域 -->
-      <div class="right nav text_right" >
-               <el-dropdown size="mini" hide-on-click placement="bottom-start" >
-              <div class="el-dropdown-left">
-           <span class="el-dropdown-link"><img src="../assets/img/header.png" alt=""></span>
-           </div>
-           <el-dropdown-menu slot="dropdown" class="dropdown1"  >
-              <li><router-link class="dhTitle dhTitle1" :to="{ name: 'Login'}">退出系统</router-link></li>
-            </el-dropdown-menu>
-         </el-dropdown>
-         </div>
+      <div class="right nav text_right">
+        <el-dropdown size="mini" hide-on-click placement="bottom-start">
+          <titleRight></titleRight>
+        </el-dropdown>
+      </div>
     </header>
     <!--内容部分-->
     <div class="con left">
@@ -69,9 +53,7 @@
                   </div>
                   <div class="msg_cage">
                     <a class="localize_title">
-                      <span>
-                        <label>编号</label>：GH32101
-                      </span>
+                      <span> <label>编号</label>：GH32101 </span>
                       <span class="right">
                         <label>监测值</label>：1.1(mg/Ls)
                       </span>
@@ -90,9 +72,7 @@
                   </div>
                   <div class="msg_cage">
                     <a class="localize_title">
-                      <span>
-                        <label>编号</label>：GH32101
-                      </span>
+                      <span> <label>编号</label>：GH32101 </span>
                       <span class="right">
                         <label>监测值</label>：1.1(mg/Ls)
                       </span>
@@ -111,9 +91,7 @@
                   </div>
                   <div class="msg_cage">
                     <a class="localize_title">
-                      <span>
-                        <label>编号</label>：GH32101
-                      </span>
+                      <span> <label>编号</label>：GH32101 </span>
                       <span class="right">
                         <label>监测值</label>：1.1(mg/Ls)
                       </span>
@@ -132,9 +110,7 @@
                   </div>
                   <div class="msg_cage">
                     <a class="localize_title">
-                      <span>
-                        <label>编号</label>：GH32101
-                      </span>
+                      <span> <label>编号</label>：GH32101 </span>
                       <span class="right">
                         <label>监测值</label>：1.1(mg/Ls)
                       </span>
@@ -189,7 +165,15 @@
 
 <script>
 //import "../assets/js/urbanPublicSafety/map.js";
+import dropMenu from "./publicComponents/dropMenu";
+import titleRight from "./publicComponents/titleRight";
+import timeRecord from "./publicComponents/timeRecord";
 export default {
+  components: {
+    dropMenu,
+    titleRight,
+    timeRecord,
+  },
   data() {
     return {
       fontColor: "#fff",
@@ -202,7 +186,6 @@ export default {
         chart6: "",
         center: "",
       },
-        date:new Date()
     };
   },
   //进行相关图表的可视化
@@ -215,9 +198,9 @@ export default {
       this.char4();
       this.char5();
       this.char6(); //20200821 用这个div来显示视频
-     // this.center();
-	  //this.centerMap(); //利用mapbox进行三维地图展示
-	  this.amapCenter();//利用高德地图进行地图展示
+      // this.center();
+      //this.centerMap(); //利用mapbox进行三维地图展示
+      this.amapCenter(); //利用高德地图进行地图展示
       window.addEventListener("resize", () => {
         this.chartName.chart1.resize();
         // this.chartName.chart2.resize();
@@ -227,39 +210,28 @@ export default {
         //this.chartName.chart6.resize();
         // this.chartName.center.resize();
       });
-    }),
-    //显示当前日期时间
-          //let _this = this// 声明一个变量指向Vue实例this，保证作用域一致
-          this.timer = setInterval(() => {
-           this.date = new Date(); // 修改数据date
-           }, 1000)
-       },
-      beforeDestroy() {
-       if (this.timer) {
-        clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
-      }
+    });
   },
   methods: {
-    dateFormat(time) {
-          var date=new Date(time);
-          var year=date.getFullYear();
-          /* 在日期格式中，月份是从0开始的，因此要加0
-          * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-          * */
-          var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-          var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
-          var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
-          var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
-          var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
-          // 拼接
-          return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
-      },
-    async test(){
-      var data = await this.test1();
-      console.log(data);
+    async test() {
+      // 前端与模型进行交互
+      var pythonTest = await this.test1();
+      console.log(pythonTest);
+	  console.log(typeof pythonTest)
+	  if(pythonTest == '自然灾害'){
+		  console.log('自然灾害');
+	  }else if(pythonTest == '事故灾难'){
+		  console.log('事故灾难');
+	  }else if(pythonTest == '社会安全'){
+		  console.log('社会安全');
+	  }else if(pythonTest == '公共卫生'){
+		  console.log('公共卫生');
+	  }else{
+		  console.log('出错');
+	  }
 
       //webscoket测试
-       /* var wsObj = new WebSocket("ws://127.0.0.1:8888");   //建立连接
+      /* var wsObj = new WebSocket("ws://127.0.0.1:8888");   //建立连接
         wsObj.onopen = function(){  //发送请求
             console.log("open");
             wsObj.send("Hello WebSocket");
@@ -274,105 +246,118 @@ export default {
             console.log("error");
         }; */
     },
-        async test1(){
-          const {data: res} = await this.$http.get("linkMysql/mysqlTest");
-          return res.data;
-        },
-	
-	//利用mapbox来实现3D地图  实现建筑的渐变色渲染
-	centerMap() {
-		console.log(1)
-		// 模拟加载一个地图
-		mapboxgl.accessToken =
-			"pk.eyJ1IjoicWlhb3ppIiwiYSI6ImNrZXYwc2M0MzIxa2Uycm9mcmVmY2QwamwifQ.M8KsobLanr4VURNHLYJDHg";
-	
-		var map = new mapboxgl.Map({
-			style: 'mapbox://styles/mapbox/dark-v10',
-			center: [104.06, 30.67],
-			zoom: 15.5,
-			pitch: 45,
-			bearing: -17.6,
-			container: 'map_div'
-		});
-	
-		//立体建筑
-		map.on('load', function() {
-			console.log('加载三维建筑')
-			// Insert the layer beneath any symbol layer.
-			var layers = map.getStyle().layers;
-			console.log(layers)
-	
-			var labelLayerId;
-			for (var i = 0; i < layers.length; i++) {
-				if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-					labelLayerId = layers[i].id;
-					break;
-				}
-			}
-	
-			map.addLayer({
-				'id': '3d-buildings',
-				'source': 'composite',
-				'source-layer': 'building',
-				'filter': ['==', 'extrude', 'true'],
-				'type': 'fill-extrusion',
-				'minzoom': 5,
-				'paint': {
-					//'fill-extrusion-color': '#fff', //原本只有一种颜色，通过设置渐变色进行渲染
-					'fill-extrusion-color':[
-						"interpolate",
-						["exponential",0.99],
-						["get","height"],
-						0,
-						"#52e5e7",
-						500,
-						"#130cb7"
-					],
-					// use an 'interpolate' expression to add a smooth transition effect to the
-					// buildings as the user zooms in
-					//使用插值表达式在用户放大时向建筑物添加平滑过渡效果
-					'fill-extrusion-height': [
-						"interpolate", ["linear"],["zoom"],
-						15, 0,
-						15.05, ["get", "height"]
-					],
-					'fill-extrusion-base': [
-						"interpolate", ["linear"],["zoom"],
-						15, 0,
-						15.05, ["get", "min_height"]
-					],
-					'fill-extrusion-opacity': .6
-				}
-			}, labelLayerId);
-		});
-		
-	},
+    async test1() {
+     var queryObject = {
+        "cmds" :'中国驻加蓬大使馆28日在其官方网站发布公告说，加蓬首都利伯维尔27日发生一起恶性案件，一名中国公民在家中遭歹徒持刀抢劫，遇刺身亡。'
+      }
+      const { data: res } = await this.$http.get("LBS/pythonModel/pythonTest", {
+        params: queryObject,
+      });
+      return res.data;
+    },
+
+    //利用mapbox来实现3D地图  实现建筑的渐变色渲染
+    centerMap() {
+      console.log(1);
+      // 模拟加载一个地图
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoicWlhb3ppIiwiYSI6ImNrZXYwc2M0MzIxa2Uycm9mcmVmY2QwamwifQ.M8KsobLanr4VURNHLYJDHg";
+
+      var map = new mapboxgl.Map({
+        style: "mapbox://styles/mapbox/dark-v10",
+        center: [104.06, 30.67],
+        zoom: 15.5,
+        pitch: 45,
+        bearing: -17.6,
+        container: "map_div",
+      });
+
+      //立体建筑
+      map.on("load", function () {
+        console.log("加载三维建筑");
+        // Insert the layer beneath any symbol layer.
+        var layers = map.getStyle().layers;
+        console.log(layers);
+
+        var labelLayerId;
+        for (var i = 0; i < layers.length; i++) {
+          if (layers[i].type === "symbol" && layers[i].layout["text-field"]) {
+            labelLayerId = layers[i].id;
+            break;
+          }
+        }
+
+        map.addLayer(
+          {
+            id: "3d-buildings",
+            source: "composite",
+            "source-layer": "building",
+            filter: ["==", "extrude", "true"],
+            type: "fill-extrusion",
+            minzoom: 5,
+            paint: {
+              //'fill-extrusion-color': '#fff', //原本只有一种颜色，通过设置渐变色进行渲染
+              "fill-extrusion-color": [
+                "interpolate",
+                ["exponential", 0.99],
+                ["get", "height"],
+                0,
+                "#52e5e7",
+                500,
+                "#130cb7",
+              ],
+              // use an 'interpolate' expression to add a smooth transition effect to the
+              // buildings as the user zooms in
+              //使用插值表达式在用户放大时向建筑物添加平滑过渡效果
+              "fill-extrusion-height": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.05,
+                ["get", "height"],
+              ],
+              "fill-extrusion-base": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                15,
+                0,
+                15.05,
+                ["get", "min_height"],
+              ],
+              "fill-extrusion-opacity": 0.6,
+            },
+          },
+          labelLayerId
+        );
+      });
+    },
     //地图模块 利用高德地图实现
     center() {
-
       //利用高德地图展示3维地图
       var map = new AMap.Map("map_div", {
         mapStyle: "amap://styles/darkblue",
         //高德不兼容IE
-         resizeEnable: true,
-         rotateEnable:true,
-         pitchEnable:true,
-         zoom: 10,
-         //pitch:65,
-         //rotation:45,
-         viewMode:'3D',//开启3D视图,默认为关闭
-         expandZoomRange: true,
-         zooms: [3, 20],
-         center: [104.06, 30.67],
+        resizeEnable: true,
+        rotateEnable: true,
+        pitchEnable: true,
+        zoom: 10,
+        //pitch:65,
+        //rotation:45,
+        viewMode: "3D", //开启3D视图,默认为关闭
+        expandZoomRange: true,
+        zooms: [3, 20],
+        center: [104.06, 30.67],
       });
 
       //添加楼块图层
       var buildLayer = new AMap.Buildings({
-        zooms:[14,20],
-        zIndex:10,
-        heightFactor: 2//2倍于默认高度，3D下有效
-      })
-      
+        zooms: [14, 20],
+        zIndex: 10,
+        heightFactor: 2, //2倍于默认高度，3D下有效
+      });
 
       //实时路况图层
       var trafficLayer = new AMap.TileLayer.Traffic({
@@ -429,45 +414,65 @@ export default {
       //   })
       // );
     },
-	//地图模块 利用高德地图实现
-	amapCenter(){
-		//楼块图层
-		var buildingLayer = new AMap.Buildings({zIndex:130,merge:false,sort:false,zooms:[10,20]});
-		var options = {
-		         hideWithoutStyle:false,//是否隐藏设定区域外的楼块
-		         areas:[{ //改变相应区域的楼块的图层
-		                color1: 'ff4682b4',
-		                color2: 'ff00bfff',
-		                path: [[102.9,31.4333],[104.8333,31.4333],[104.8333,30.08333],[102.9,30.08333],[102.9,31.4333]]
-		        }]};
-		    buildingLayer.setStyle(options); //此配色优先级高于自定义mapStyle
-		
-		//初始化地图
-		 var map = new AMap.Map("map_div", {
-		        zoom:17,
-		        pitch:50,
-		        showIndoorMap:false,
-		        showLabel:false,//显示地图标注
-		        mapStyle:'amap://styles/darkblue',
-		        center:[104.06, 30.67],
-		        features:['bg','point','road'],
-		        viewMode:'3D',
-		        layers:[
-		            new AMap.TileLayer(),
-		            buildingLayer,
-		        ]
-		    });
-			
-			//添加实时交通路况图层
-			var traffic = new AMap.TileLayer.Traffic({
-				'autoRefresh': true,     //是否自动刷新，默认为false
-				'interval': 180,         //刷新间隔，默认180s
-			     zIndex:130
-			    });
-			
-			map.add(traffic); //通过add方法添加图层
-	},
-    char1() {
+    //地图模块 利用高德地图实现
+    amapCenter() {
+      //楼块图层
+      var buildingLayer = new AMap.Buildings({
+        zIndex: 130,
+        merge: false,
+        sort: false,
+        zooms: [10, 20],
+      });
+      var options = {
+        hideWithoutStyle: false, //是否隐藏设定区域外的楼块
+        areas: [
+          {
+            //改变相应区域的楼块的图层
+            color1: "ff4682b4",
+            color2: "ff00bfff",
+            path: [
+              [102.9, 31.4333],
+              [104.8333, 31.4333],
+              [104.8333, 30.08333],
+              [102.9, 30.08333],
+              [102.9, 31.4333],
+            ],
+          },
+        ],
+      };
+      buildingLayer.setStyle(options); //此配色优先级高于自定义mapStyle
+
+      //初始化地图
+      var map = new AMap.Map("map_div", {
+        zoom: 17,
+        pitch: 50,
+        showIndoorMap: false,
+        showLabel: false, //显示地图标注
+        mapStyle: "amap://styles/darkblue",
+        center: [104.06, 30.67],
+        features: ["bg", "point", "road"],
+        viewMode: "3D",
+        layers: [new AMap.TileLayer(), buildingLayer],
+      });
+
+      //添加实时交通路况图层
+      var traffic = new AMap.TileLayer.Traffic({
+        autoRefresh: true, //是否自动刷新，默认为false
+        interval: 180, //刷新间隔，默认180s
+        zIndex: 130,
+      });
+
+      map.add(traffic); //通过add方法添加图层
+    },
+    async char1() {
+      //获取数据实例
+
+      // const { data: res1 } = await this.$http.get(
+      //   "LBS/baiduHy/BJarea_data/migration"
+      // );
+      // var migrationData = res1.data;
+      // console.log(migrationData);
+
       this.chartName.chart1 = this.$echarts.init(
         document.getElementById("char11")
       );
@@ -1033,31 +1038,29 @@ export default {
 @import "../assets/css/urbanPublicSafety/index01.css";
 #urbanSafety {
   width: 100vw;
-  height: 100vh; 
+  height: 100vh;
   background-color: #070b0f !important;
-
 }
 .left-box {
-    width: 25%;
-    height: 80px;
-    display: flex;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    -webkit-box-align: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0px 0.104167rem;
-    margin: 0 auto;
+  width: 25%;
+  height: 80px;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 0.104167rem;
+  margin: 0 auto;
 }
 
- .el-dropdown-link {
-    cursor: pointer;
-    color: #c0c4cc;
-  }
-.el-dropdown-left{
+.el-dropdown-link {
+  cursor: pointer;
+  color: #c0c4cc;
+}
+.el-dropdown-left {
   margin-right: 35px;
-  margin-top:30px;
-  
+  margin-top: 30px;
 }
 .centerTitle {
   font-size: 2rem !important;
@@ -1079,51 +1082,50 @@ export default {
 }
 .dhTitle {
   font-size: 1rem;
-  padding:0.6rem;
-  color:#c0c4cc;
+  padding: 0.6rem;
+  color: #c0c4cc;
 }
 
-.dhTitle a{
-  color:#c0c4cc !important; 
+.dhTitle a {
+  color: #c0c4cc !important;
 }
 .menu_title {
-        /* margin: 0 auto; */
-        /* margin-top:22px; */
-        margin-left: 20px;
-        vertical-align: middle;
-        line-height: 0.166667rem !important;
-        /* color:  #034c6a ; */
-        font-size: 22px;
-        border: 1px solid #2977ff;
+  /* margin: 0 auto; */
+  /* margin-top:22px; */
+  margin-left: 20px;
+  vertical-align: middle;
+  line-height: 0.166667rem !important;
+  /* color:  #034c6a ; */
+  font-size: 22px;
+  border: 1px solid #2977ff;
 }
 .dropdown {
-  background-color:rgb(3,8,41);
+  background-color: rgb(3, 8, 41);
   /* opacity: 0.9; */
   border: 1px solid #2977ff;
   width: 135px;
   text-align: center;
 }
 .dropdown1 {
-  background-color:rgb(3,8,41);
+  background-color: rgb(3, 8, 41);
   /* opacity: 0.9; */
   border: 1px solid #2977ff;
   width: 95px;
   text-align: center;
-  
 }
- li:hover{
-  background-color:#0f2967;
-  color:#fff
+li:hover {
+  background-color: #0f2967;
+  color: #fff;
 }
-.time_{
+.time_ {
   position: absolute;
-    margin-top: 4px;
-    margin-left: -70px;
+  margin-top: 4px;
+  margin-left: -70px;
 }
 /* 设置内容和表头占满全屏 */
 .header {
   height: 8vh !important;
-   border-bottom: 1px dashed #444;
+  border-bottom: 1px dashed #444;
 }
 .con {
   height: 92vh;

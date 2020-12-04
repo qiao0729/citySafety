@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="layui.css">
     <link rel="stylesheet" href="../src/assets/css/home/font-awesome.min.css">
     <!-- <script src="../src/static/jquery.js"></script>  -->
+    <style>
+      /* 隐藏高德地图logo */
+      .amap-logo{
+       display: none;
+       opacity:0 !important;
+       }
+       .amap-copyright {
+           opacity:0;
+       }
+    </style>
 
      <script src="laydate/laydate.js"></script>
 	 <!-- 腾讯地图API -->
@@ -21,8 +31,10 @@
      <script src="http://mapv.baidu.com/build/mapv.js"></script>
 	 
 	 <!-- 高德地图key -->
-     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=2369b92da059e1dbd14a01d797b1752a&plugin=Map3D"></script>
-     <script type="text/javascript" src="https://webapi.amap.com/subway?v=1.0&key=2369b92da059e1dbd14a01d797b1752a&callback=cbk"></script>
+     <script type="text/javascript" language="javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=596d78e47388f7b66cfbfcb5f567593b&plugin=Map3D,AMap.DistrictSearch"></script>
+     <!-- <script type="text/javascript" src="https://webapi.amap.com/subway?v=1.0&key=2369b92da059e1dbd14a01d797b1752a&callback=cbk"></script> -->
+	 <!-- UI组件库 1.0 -->
+	 <script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
 	 <!-- mapbox -->    
       <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
       <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />

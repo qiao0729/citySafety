@@ -17,6 +17,13 @@ import Hik from '../components/UPS/Hik.vue'
 
 //出租车轨迹挖掘
 import Trace from '../components/UPS/Trace.vue'
+import ShowTrace from '../components/UPS/ShowTrace.vue'
+
+//人流监测
+import CrowdFlow from '../components/UPS/CrowdFlow'
+
+//社交媒体
+import Sjmt1 from '../components/UPS/Sjmt1'
 
 Vue.use(VueRouter)
 
@@ -84,6 +91,25 @@ Vue.use(VueRouter)
 		name: 'Trace',
 		component: Trace
 	},
+	
+	//车辆轨迹挖掘
+	{
+		path: '/ShowTrace',
+		name: 'ShowTrace',
+		component: ShowTrace
+	},
+
+		//人流预测
+		{
+			path: '/CrowdFlow',
+			name: 'CrowdFlow',
+			component: CrowdFlow
+		},
+		{
+			path: '/Sjmt1',
+			name: 'Sjmt1',
+			component: Sjmt1
+		}
   
 
 ]
